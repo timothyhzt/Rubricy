@@ -6,8 +6,8 @@ A web-based writing assistant with a Rubricy chatbot interface and Python backen
 
 - ✍️ Rich text editor with formatting tools
 - 🤖 AI-powered writing assistant (Rubricy)
-- 📝 Grammar and spelling checking
-- 🎨 Style improvement suggestions
+- 📝 Grammar and spelling checking(planned)
+- 🎨 Style improvement suggestions(planned)
 - 💡 Writing idea generation
 - 💾 Save and load documents
 - 📤 Export documents in multiple formats
