@@ -1,0 +1,1017 @@
+/* 
+ * Modern Professional CSS for Writer's Assistant
+ * 
+ * This stylesheet provides a modern, professional design system with:
+ * - CSS custom properties for consistent theming
+ * - Responsive layout for desktop and mobile
+ * - Smooth animations and transitions
+ * - Accessible color contrast
+ * - Clean, card-based UI design
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+    /* Color Palette: Primary brand colors */
+    --primary-color: #8B4513;      /* Saddle brown - main brand color */
+    --primary-hover: #654321;     /* Dark brown for hover states */
+    --secondary-color: #A0826D;   /* Tan brown - secondary accent */
+    
+    /* Background Colors: Layered surfaces */
+    --background: #d4c5a9;         /* Page background (darker newspaper beige) */
+    --surface: #f5f0e8;            /* Card/surface background (light tan/off-white) */
+    --surface-elevated: #f5f0e8;   /* Elevated surfaces (light tan/off-white) */
+    
+    /* Text Colors: Hierarchical text colors */
+    --text-primary: #1e293b;       /* Main text (dark slate) */
+    --text-secondary: #64748b;     /* Secondary text (medium gray) */
+    --text-muted: #94a3b8;          /* Muted text (light gray) */
+    
+    /* Border Colors: Subtle dividers */
+    --border-color: #e2e8f0;        /* Standard borders */
+    --border-light: #f1f5f9;       /* Light borders for subtle separation */
+    
+    /* Status Colors: Semantic colors for feedback */
+    --success: #10b981;            /* Green - success states */
+    --warning: #f59e0b;            /* Orange - warning states */
+    --error: #ef4444;               /* Red - error states */
+    
+    /* Shadow System: Elevation levels */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);                    /* Subtle shadow */
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);  /* Medium shadow */
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Large shadow */
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Extra large shadow */
+    
+    /* Border Radius: Consistent rounded corners */
+    --radius-sm: 6px;   /* Small radius for buttons, inputs */
+    --radius-md: 8px;   /* Medium radius for cards */
+    --radius-lg: 12px;  /* Large radius for containers */
+    --radius-xl: 16px;  /* Extra large radius for chat windows */
+}
+
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+
+/* Universal reset: Remove default margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Include padding/border in width calculations */
+}
+
+/* HTML element: Ensure transparency for texture */
+html {
+    background: transparent;
+    min-height: 100%;
+}
+
+/* Body: Base typography and layout with wrinkled newspaper texture */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background: transparent; /* Transparent so pseudo-elements show through */
+    color: var(--text-primary);
+    line-height: 1.6; /* Improved readability */
+    -webkit-font-smoothing: antialiased; /* Smooth font rendering on macOS */
+    -moz-osx-font-smoothing: grayscale;  /* Smooth font rendering on Firefox */
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Wrinkled newspaper texture effect using pseudo-element */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-color: #d4c5a9; /* Darker base newspaper color - more aged appearance */
+    background-image: 
+        /* Base color variation - darker tones */
+        linear-gradient(135deg, rgba(212, 197, 169, 0.9) 0%, rgba(200, 185, 155, 0.9) 25%, rgba(212, 197, 169, 0.9) 50%, rgba(190, 175, 145, 0.9) 75%, rgba(212, 197, 169, 0.9) 100%),
+        /* Wrinkled crease shadows - much more visible */
+        radial-gradient(ellipse 800px 300px at 30% 20%, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.08) 50%, transparent 70%),
+        radial-gradient(ellipse 700px 250px at 70% 40%, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.06) 50%, transparent 70%),
+        radial-gradient(ellipse 600px 280px at 20% 70%, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0.07) 50%, transparent 70%),
+        radial-gradient(ellipse 750px 240px at 80% 80%, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 70%),
+        radial-gradient(ellipse 500px 200px at 50% 10%, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.04) 50%, transparent 70%),
+        radial-gradient(ellipse 650px 220px at 15% 50%, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.03) 50%, transparent 70%),
+        radial-gradient(ellipse 550px 180px at 45% 60%, rgba(0, 0, 0, 0.19) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 70%),
+        /* Wrinkle highlights - more pronounced */
+        radial-gradient(ellipse 400px 150px at 25% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 40%, transparent 60%),
+        radial-gradient(ellipse 350px 120px at 75% 60%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.15) 40%, transparent 60%),
+        radial-gradient(ellipse 300px 140px at 15% 75%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, transparent 60%),
+        radial-gradient(ellipse 280px 100px at 85% 25%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.08) 40%, transparent 60%),
+        radial-gradient(ellipse 320px 110px at 60% 45%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 40%, transparent 60%),
+        /* Paper texture pattern - more visible horizontal lines */
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.08) 0px,
+            transparent 1px,
+            transparent 2px,
+            rgba(0, 0, 0, 0.08) 3px
+        ),
+        /* Paper texture pattern - more visible vertical lines */
+        repeating-linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.07) 0px,
+            transparent 1px,
+            transparent 4px,
+            rgba(0, 0, 0, 0.07) 5px
+        );
+    background-size: 
+        200% 200%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 4px,
+        5px 100%;
+    background-position: 
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0% 0%,
+        0 0,
+        0 0;
+    opacity: 1;
+    pointer-events: none;
+}
+
+/* Additional subtle texture overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: 
+        /* More visible paper fiber texture - diagonal */
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.04) 3px,
+            rgba(0, 0, 0, 0.04) 6px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.03) 3px,
+            rgba(0, 0, 0, 0.03) 6px
+        ),
+        /* More visible fine grain texture */
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 1px,
+            rgba(0, 0, 0, 0.02) 1px,
+            rgba(0, 0, 0, 0.02) 2px
+        ),
+        /* Additional aged paper spots */
+        radial-gradient(circle 2px at 20% 30%, rgba(0, 0, 0, 0.03) 0%, transparent 50%),
+        radial-gradient(circle 2px at 80% 70%, rgba(0, 0, 0, 0.03) 0%, transparent 50%),
+        radial-gradient(circle 1.5px at 40% 60%, rgba(0, 0, 0, 0.025) 0%, transparent 50%),
+        radial-gradient(circle 1.5px at 70% 20%, rgba(0, 0, 0, 0.025) 0%, transparent 50%);
+    background-size: 25px 25px, 25px 25px, 2px 2px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    opacity: 1;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+/* Main container: Centers content and sets max width */
+.container {
+    max-width: 1400px; /* Maximum content width */
+    margin: 0 auto;     /* Center horizontally */
+    padding: 2rem;      /* Spacing around content */
+    min-height: 100vh;  /* Full viewport height */
+}
+
+/* ============================================
+   Header Section
+   ============================================ */
+
+/* Main header: Top navigation bar with logo */
+.main-header {
+    background: rgba(255, 254, 240, 0.85);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    backdrop-filter: blur(0.5px);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-md);
+    padding: 6px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.logo-text h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.02em;
+}
+
+.tagline {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* ============================================
+   Main Layout
+   ============================================ */
+
+/* Main content area: Two-column grid layout */
+main {
+    display: grid;
+    grid-template-columns: 1fr 350px; /* Editor takes remaining space, suggestions panel fixed width */
+    gap: 1.5rem;                      /* Spacing between columns */
+    align-items: start;               /* Align items to top */
+}
+
+/* ============================================
+   Editor Section
+   ============================================ */
+
+/* Editor container: Flex column for vertical layout */
+.editor-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-card {
+    background: rgba(255, 254, 240, 0.85);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    min-height: 600px;
+    backdrop-filter: blur(0.5px);
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--background);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border-color);
+    margin: 0 0.5rem;
+}
+
+.tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.tool-btn:hover {
+    background: var(--background);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.tool-btn:active {
+    transform: translateY(0);
+}
+
+.tool-icon {
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.tool-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.action-btn {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.action-btn:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: white;
+}
+
+.editor-wrapper {
+    flex: 1;
+    padding: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#writingArea {
+    flex: 1;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-primary);
+    background: transparent;
+    padding: 0;
+    overflow-y: auto;
+    min-height: 100px;
+}
+
+#writingArea:empty:before {
+    content: attr(data-placeholder);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+/* Formatting styles for contentEditable */
+#writingArea h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 1rem 0 0.5rem 0;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+#writingArea h2:first-child {
+    margin-top: 0;
+}
+
+#writingArea p {
+    margin: 0.5rem 0;
+}
+
+#writingArea p:first-child {
+    margin-top: 0;
+}
+
+#writingArea p:last-child {
+    margin-bottom: 0;
+}
+
+#writingArea strong,
+#writingArea b {
+    font-weight: 700;
+}
+
+#writingArea em,
+#writingArea i {
+    font-style: italic;
+}
+
+#writingArea u {
+    text-decoration: underline;
+}
+
+.editor-footer {
+    padding: 1rem 1.5rem;
+    background: var(--background);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.word-count {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.count-item {
+    font-weight: 500;
+}
+
+.count-separator {
+    color: var(--text-muted);
+}
+
+/* ============================================
+   Suggestions Panel
+   ============================================ */
+
+/* Suggestions panel container: Right sidebar */
+.suggestions-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-card {
+    background: rgba(255, 254, 240, 0.85);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    min-height: 600px;
+    backdrop-filter: blur(0.5px);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--background);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.panel-icon {
+    font-size: 1.25rem;
+}
+
+.panel-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.suggestions-list {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* ============================================
+   Rubricy Chat Styles
+   ============================================ */
+
+/* Rubricy bot container: Fixed position floating widget */
+.rubricy-bot {
+    position: fixed;      /* Fixed to viewport */
+    bottom: 2rem;         /* Distance from bottom */
+    right: 2rem;          /* Distance from right */
+    z-index: 1000;        /* Above other content */
+    display: flex;
+    align-items: flex-end; /* Align avatar and chat to bottom */
+    gap: 1rem;            /* Spacing between avatar and chat */
+}
+
+.rubricy-avatar {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.rubricy-avatar:hover {
+    transform: scale(1.05);
+}
+
+.rubricy-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eye {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.left-eye {
+    left: 35%;
+}
+
+.right-eye {
+    right: 35%;
+}
+
+.mouth {
+    position: absolute;
+    width: 12px;
+    height: 6px;
+    border: 2px solid white;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    bottom: 30%;
+}
+
+.rubricy-chat {
+    width: 380px;
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 600px;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.chat-header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.chat-avatar-small {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.chat-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.chat-status {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.minimize-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: background 0.2s ease;
+}
+
+.minimize-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 1.25rem;
+    overflow-y: auto;
+    background: var(--background);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.message-content {
+    flex: 1;
+}
+
+.message-text {
+    background: var(--surface);
+    padding: 0.875rem 1rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.message-text ul {
+    margin: 0.5rem 0 0 1.25rem;
+    padding: 0;
+}
+
+.message-text li {
+    margin: 0.25rem 0;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--background);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.quick-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.quick-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.quick-btn-icon {
+    font-size: 0.875rem;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+}
+
+#chatInput {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#chatInput:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.send-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.send-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.send-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.toggle-rubricy-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-xl);
+    z-index: 999;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-rubricy-btn:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 1);
+    border-color: var(--primary-color);
+}
+
+.toggle-rubricy-btn:active {
+    transform: scale(0.95);
+}
+
+.Rubricy-icon {
+    display: block;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Iframe container: Styling for embedded content */
+.iframe-container {
+    position: fixed;
+    bottom: 6rem; /* Positioned above toggle button */
+    right: 2rem;
+    z-index: 1000;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-color);
+    max-width: 580px;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.iframe-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.iframe-container iframe {
+    width: 100%;
+    height: 315px;
+    border: none;
+    border-radius: var(--radius-md);
+    display: block;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: var(--surface);
+    color: var(--text-primary);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-color);
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    max-width: 300px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification-success {
+    border-left: 4px solid var(--success);
+}
+
+.notification-info {
+    border-left: 4px solid var(--primary-color);
+}
+
+.notification-error {
+    border-left: 4px solid var(--error);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+/* Tablet breakpoint: Stack columns vertically */
+@media (max-width: 1024px) {
+    /* Switch to single column layout */
+    main {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Add spacing when stacked */
+    .suggestions-panel {
+        margin-top: 1.5rem;
+    }
+    
+    /* Slightly smaller chat on tablets */
+    .rubricy-chat {
+        width: 340px;
+    }
+}
+
+/* Mobile breakpoint: Optimize for small screens */
+@media (max-width: 768px) {
+    /* Reduce container padding */
+    .container {
+        padding: 1rem;
+    }
+    
+    /* Full-width chat on mobile (with margins) */
+    .rubricy-chat {
+        width: calc(100vw - 2rem); /* Full width minus margins */
+        right: 1rem;
+        bottom: 1rem;
+    }
+    
+    /* Adjust positioning for mobile */
+    .rubricy-bot {
+        right: 1rem;
+        bottom: 1rem;
+    }
+    
+    /* Toggle button positioning */
+    .toggle-rubricy-btn {
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+/* Custom scrollbar: Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 8px;   /* Vertical scrollbar width */
+    height: 8px;  /* Horizontal scrollbar height */
+}
+
+/* Scrollbar track: Background area */
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+/* Scrollbar thumb: Draggable handle */
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+/* Scrollbar thumb hover state */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
