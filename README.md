@@ -33,7 +33,7 @@ python app.py
 
 The server will start at `http://localhost:5000`
 
-3. Open `index.html` in your web browser or serve it through the Flask app.
+3. Open `webpage.html` in your web browser or serve it through the Flask app.
 
 ### API Endpoints
 
@@ -52,9 +52,9 @@ The backend provides the following REST API endpoints:
 
 ```
 .
-├── app.py              # Flask backend server
-├── requirements.txt    # Python dependencies
-├── index.html         # Frontend HTML
+├── app.py             # Flask backend server
+├── requirements.txt   # Python dependencies
+├── webpage.html       # Frontend HTML
 ├── data/              # Saved documents (created automatically)
 └── README.md          # This file
 ```
