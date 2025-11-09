@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+    Writer's Assistant - AI Writing Companion
+    Main HTML structure for the writing assistant application
+    Features: Text editor, AI chat assistant (Rubricy), writing suggestions panel
+-->
+<html lang="en">
+<head>
+    <!-- Character encoding and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page title -->
+    <title>Writer's Assistant</title>
+    
+    <!-- Favicon: Browser tab icon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Google Fonts: Preconnect for performance optimization -->
+    <!-- Times New Roman is used as the default font for newspaper theme -->
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main container: Centers content and sets max width -->
+    <div class="container">
+        <!-- Header section: Logo and branding -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <!-- Logo icon with gradient background -->
+                    <div class="logo-icon">
+                        <img src="./logo.png" alt="Writer's Assistant Logo" class="logo-img" onerror="console.error('Logo failed to load'); this.style.display='none'; this.parentElement.innerHTML='✍️';">
+                    </div>
+                    <div class="logo-text">
+                        <h1>Write of Passage ~ Master the art of academic writing</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content area: Two-column layout (editor + suggestions) -->
+        <main>
+            <!-- Left column: Text editor section -->
+            <div class="editor-section">
+                <div class="editor-card">
+                    <!-- Toolbar: Formatting and action buttons -->
+                    <div class="toolbar">
+                        <!-- First group: Text formatting buttons -->
+                        <div class="toolbar-group">
+                            <button id="headingBtn" class="tool-btn" title="Heading - Add # at start of line">
+                                <span class="tool-icon">H</span>
+                                <span class="tool-label">Heading</span>
+                            </button>
+                            <button id="boldBtn" class="tool-btn" title="Bold - Make text bold">
+                                <span class="tool-icon">B</span>
+                                <span class="tool-label">Bold</span>
+                            </button>
+                            <button id="italicBtn" class="tool-btn" title="Italic - Make text italic">
+                                <span class="tool-icon">I</span>
+                                <span class="tool-label">Italic</span>
+                            </button>
+                            <button id="underlineBtn" class="tool-btn" title="Underline - Underline text">
+                                <span class="tool-icon">U</span>
+                                <span class="tool-label">Underline</span>
+                            </button>
+                        </div>
+                        <!-- Visual divider between button groups -->
+                        <div class="divider"></div>
+                        <!-- Second group: Action buttons (Save, Export) -->
+                        <div class="toolbar-group">
+                            <button id="saveBtn" class="tool-btn action-btn" title="Save">
+                                <span class="tool-icon">💾</span>
+                                <span class="tool-label">Save</span>
+                            </button>
+                            <button id="exportBtn" class="tool-btn action-btn" title="Export">
+                                <span class="tool-icon">📤</span>
+                                <span class="tool-label">Export</span>
+                            </button>
+                            <button id="newBtn" class="tool-btn action-btn" title="New Document">
+                                <span class="tool-icon">📄</span>
+                                <span class="tool-label">New</span>
+                            </button>
+                            <button id="openBtn" class="tool-btn action-btn" title="Open File">
+                                <span class="tool-icon">📁</span>
+                                <span class="tool-label">Open</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Main text editing area -->
+                    <div class="editor-wrapper">
+                        <div 
+                            id="writingArea" 
+                            contenteditable="true"
+                            data-placeholder="Start writing your masterpiece here... The AI assistant is ready to help!"
+                            spellcheck="true"
+                        ></div>
+                    </div>
+                    <!-- Footer: Word and character count display -->
+                    <div class="editor-footer">
+                        <div class="word-count">
+                            <span class="count-item" id="wordCount">0 words</span>
+                            <span class="count-separator">•</span>
+                            <span class="count-item" id="charCount">0 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right column: Writing suggestions panel -->
+            <div class="suggestions-panel">
+                <div class="panel-card">
+                    <!-- Panel header with icon and title -->
+                    <div class="panel-header">
+                        <div class="panel-icon">💡</div>
+                        <h3>Writing Suggestions</h3>
+                    </div>
+                    <!-- Suggestions list container (populated by JavaScript) -->
+                    <div id="suggestionsList" class="suggestions-list">
+                        <!-- Empty state: Shown when no suggestions available -->
+                        <div class="empty-state">
+                            <div class="empty-icon">📝</div>
+                            <p>Ask Rubricy for help with your writing!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Ai -->
+    <div id="iframeContainer" class="iframe-container">
+        <iframe 
+            src="https://app.aiml.asu.edu/2ee0d931f2304196ad4aebb299057443" 
+            width="560" 
+            height="315" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+            loading="lazy"
+            title="AI Assistant">
+        </iframe>
+    </div>
+
+    <!-- Toggle button: Floating button to show/hide AI assistant -->
+    <button id="toggleIframe" class="toggle-rubricy-btn" title="Toggle AI Assistant" style="background-image: url('favicon.ico.ico'); background-size: 80%; background-repeat: no-repeat; background-position: center;">
+    </button>
+
+    <!-- JavaScript: Frontend logic and API interactions -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+
